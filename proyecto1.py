@@ -7,23 +7,32 @@ def convertir_decimal_dividiendo(numero):
 
 def convertir_decimal_potencias(numero):
     resultado = ''
-    potencias = [1024,512,256,128,64,32,16,8,4,2,1]
-    for x in potencias:
-        if potencias[x]<=numero:
-            potencia = x
+    potencias = (1024,512,256,128,64,32,16,8,4,2,1)
+    ##Ciclo para detectar la potencia que cabe dentro del numero
+    for i in range(len(potencias)):     
+      
+        if potencias[i]<=numero:
+            potencia = potencias[i]
+            contador = i            
             break
-    resultado = comparador(potencia, numero)+ resultado 
-    while potencia != 1:       
         
-            
-        potencia = potencia - potencias[potencias.index(potencia)+1]    
-        resultado = comparador(potencia, numero) + resultado 
+    resultado = comparador(potencia, numero)+ resultado
+    ##ciclo que recorre lo que falta de la tupla de potencias y construye el resultado
+    while len(potencias)-contador != 1: 
+        potencia = potencia + potencias[contador+1]
+        resultado =  resultado +  comparador(potencia, numero)      
+        if comparador(potencia , numero) == '0':
+            potencia = potencia - potencias[contador+1]        
+        contador +=1    
+    return resultado
             
 def comparador(potencia, numero):
+    respuesta = 0
     if potencia > numero:
-        return '0'
+        respuesta = 0
     else:
-        return '1'
+        respuesta = 1
+    return str(respuesta) 
 
 
 
